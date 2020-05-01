@@ -1,0 +1,1276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>848</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>PMD Sky Starter Editor</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>-4</x>
+      <y>-1</y>
+      <width>811</width>
+      <height>801</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab1">
+     <attribute name="title">
+      <string>Player</string>
+     </attribute>
+     <widget class="QWidget" name="horizontalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>781</width>
+        <height>761</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Male</string>
+         </property>
+         <widget class="QWidget" name="verticalLayoutWidget">
+          <property name="geometry">
+           <rect>
+            <x>9</x>
+            <y>19</y>
+            <width>371</width>
+            <height>731</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QGroupBox" name="groupBox_14">
+             <property name="title">
+              <string>Hardy</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget">
+              <property name="geometry">
+               <rect>
+                <x>49</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo1"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck1">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_15">
+             <property name="title">
+              <string>Docile</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_3">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo2"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck2">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_13">
+             <property name="title">
+              <string>Brave</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_4">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo3"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck3">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_12">
+             <property name="title">
+              <string>Jolly</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_5">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo4"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck4">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_11">
+             <property name="title">
+              <string>Impish</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_6">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo5"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck5">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_16">
+             <property name="title">
+              <string>Naive</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_7">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo6"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck6">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_3">
+             <property name="title">
+              <string>Timid</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_8">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_10">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo7"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck7">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_4">
+             <property name="title">
+              <string>Hasty</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_9">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo8"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck8">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_17">
+             <property name="title">
+              <string>Sassy</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_10">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_12">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo9"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck9">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_5">
+             <property name="title">
+              <string>Calm</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_11">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo10"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck10">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_6">
+             <property name="title">
+              <string>Relaxed</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_12">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo11"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck11">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_18">
+             <property name="title">
+              <string>Lonely</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_13">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_15">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo12"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck12">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_7">
+             <property name="title">
+              <string>Quirky</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_14">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_16">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo13"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck13">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_8">
+             <property name="title">
+              <string>Quiet</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_15">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_17">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo14"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck14">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_9">
+             <property name="title">
+              <string>Rash</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_16">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_18">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo15"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck15">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_10">
+             <property name="title">
+              <string>Bold</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_17">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_19">
+               <item>
+                <widget class="QComboBox" name="PlayerMaleCombo16"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerMaleCheck16">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Female</string>
+         </property>
+         <widget class="QWidget" name="verticalLayoutWidget_2">
+          <property name="geometry">
+           <rect>
+            <x>9</x>
+            <y>19</y>
+            <width>371</width>
+            <height>731</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QGroupBox" name="groupBox_19">
+             <property name="title">
+              <string>Hardy</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_18">
+              <property name="geometry">
+               <rect>
+                <x>49</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_20">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo1"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck1">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_20">
+             <property name="title">
+              <string>Docile</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_19">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_21">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo2"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck2">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_21">
+             <property name="title">
+              <string>Brave</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_20">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_22">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo3"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck3">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_22">
+             <property name="title">
+              <string>Jolly</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_21">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_23">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo4"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck4">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_23">
+             <property name="title">
+              <string>Impish</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_22">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_24">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo5"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck5">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_24">
+             <property name="title">
+              <string>Naive</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_23">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_25">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo6"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck6">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_25">
+             <property name="title">
+              <string>Timid</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_24">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_26">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo7"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck7">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_26">
+             <property name="title">
+              <string>Hasty</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_25">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_27">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo8"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck8">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_27">
+             <property name="title">
+              <string>Sassy</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_26">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_28">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo9"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck9">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_28">
+             <property name="title">
+              <string>Calm</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_27">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_29">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo10"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck10">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_29">
+             <property name="title">
+              <string>Relaxed</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_28">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_30">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo11"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck11">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_30">
+             <property name="title">
+              <string>Lonely</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_29">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_31">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo12"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck12">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_31">
+             <property name="title">
+              <string>Quirky</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_30">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_32">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo13"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck13">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_32">
+             <property name="title">
+              <string>Quiet</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_31">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_33">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo14"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck14">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_33">
+             <property name="title">
+              <string>Rash</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_32">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_34">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo15"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck15">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_34">
+             <property name="title">
+              <string>Bold</string>
+             </property>
+             <widget class="QWidget" name="horizontalLayoutWidget_33">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>10</y>
+                <width>311</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_35">
+               <item>
+                <widget class="QComboBox" name="PlayerFemaleCombo16"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="PlayerFemaleCheck16">
+                 <property name="text">
+                  <string>Female</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab2">
+     <attribute name="title">
+      <string>Partner</string>
+     </attribute>
+     <widget class="QWidget" name="gridLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>10</y>
+        <width>701</width>
+        <height>751</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="3" column="0">
+        <widget class="QComboBox" name="PartnerCombo4"/>
+       </item>
+       <item row="6" column="0">
+        <widget class="QComboBox" name="PartnerCombo7"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QComboBox" name="PartnerCombo2"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QComboBox" name="PartnerCombo3"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QComboBox" name="PartnerCombo5"/>
+       </item>
+       <item row="7" column="0">
+        <widget class="QComboBox" name="PartnerCombo8"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QComboBox" name="PartnerCombo1"/>
+       </item>
+       <item row="8" column="0">
+        <widget class="QComboBox" name="PartnerCombo9"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QCheckBox" name="PartnerCheck1">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QCheckBox" name="PartnerCheck12">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QComboBox" name="PartnerCombo12"/>
+       </item>
+       <item row="5" column="0">
+        <widget class="QComboBox" name="PartnerCombo6"/>
+       </item>
+       <item row="9" column="0">
+        <widget class="QComboBox" name="PartnerCombo10"/>
+       </item>
+       <item row="10" column="0">
+        <widget class="QComboBox" name="PartnerCombo11"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QComboBox" name="PartnerCombo13"/>
+       </item>
+       <item row="2" column="2">
+        <widget class="QComboBox" name="PartnerCombo14"/>
+       </item>
+       <item row="3" column="2">
+        <widget class="QComboBox" name="PartnerCombo15"/>
+       </item>
+       <item row="4" column="2">
+        <widget class="QComboBox" name="PartnerCombo16"/>
+       </item>
+       <item row="5" column="2">
+        <widget class="QComboBox" name="PartnerCombo17"/>
+       </item>
+       <item row="6" column="2">
+        <widget class="QComboBox" name="PartnerCombo18"/>
+       </item>
+       <item row="7" column="2">
+        <widget class="QComboBox" name="PartnerCombo19"/>
+       </item>
+       <item row="8" column="2">
+        <widget class="QComboBox" name="PartnerCombo20"/>
+       </item>
+       <item row="9" column="2">
+        <widget class="QComboBox" name="PartnerCombo21"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QCheckBox" name="PartnerCheck2">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="PartnerCheck3">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QCheckBox" name="PartnerCheck4">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QCheckBox" name="PartnerCheck5">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QCheckBox" name="PartnerCheck6">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QCheckBox" name="PartnerCheck7">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QCheckBox" name="PartnerCheck8">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QCheckBox" name="PartnerCheck9">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1">
+        <widget class="QCheckBox" name="PartnerCheck10">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1">
+        <widget class="QCheckBox" name="PartnerCheck11">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QCheckBox" name="PartnerCheck13">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QCheckBox" name="PartnerCheck14">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="3">
+        <widget class="QCheckBox" name="PartnerCheck15">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="3">
+        <widget class="QCheckBox" name="PartnerCheck16">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="3">
+        <widget class="QCheckBox" name="PartnerCheck17">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="3">
+        <widget class="QCheckBox" name="PartnerCheck18">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="3">
+        <widget class="QCheckBox" name="PartnerCheck19">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="3">
+        <widget class="QCheckBox" name="PartnerCheck20">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="3">
+        <widget class="QCheckBox" name="PartnerCheck21">
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
