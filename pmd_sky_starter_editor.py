@@ -120,7 +120,7 @@ def choose_open_file():
 
 def create_file():
     filename = choose_save_file()
-    if filename:
+    if filename[0]:
         ui.progressBar.setValue(0)
 
         save_values()
