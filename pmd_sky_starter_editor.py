@@ -1,4 +1,10 @@
+import os
+import shutil
+import subprocess
 import sys
+import threading
+
+from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from gui.starter import Ui_MainWindow
 
@@ -44,42 +50,329 @@ partnerCheckBoxes = [ui.PartnerCheck1, ui.PartnerCheck2, ui.PartnerCheck3, ui.Pa
                     ui.PartnerCheck21]
 
 
-fileName = ""
+overlay13Memory = []
+
+sTextMemory = []
+eTextMemory = []
+iTextMemory = []
+gTextMemory = []
+fTextMemory = []
+textMemory = [sTextMemory, eTextMemory, iTextMemory, gTextMemory, fTextMemory]
+
+portraitMemory = []
 
 
 def bytes2int(b):
     return int.from_bytes(b, "little")
 
 
-def int2bytes(i):
-    return i.to_bytes(2, byteorder='little')
+def int2bytes(i, n):
+    return i.to_bytes(n, 'little')
 
 
-# n es el numero de caracteres
-def string2bytes(s, n):
-    if len(s) > n:
-        s = s[0:n-1] + "."
-    else:
-        s = s.ljust(n)
-    return s.encode('ansi')
+def signedint2bytes(i, n):
+    return i.to_bytes(n, 'little', signed=True)
+
+
+def increase_step():
+    if ui.openButton.isEnabled():
+        timer.stop()
+        if ui.openButton.text() == "Save":
+            ui.progressBar.setValue(100)
+            init_values()
+            ctypes.windll.user32.MessageBoxW(0, "Success: file opened!", "Info", 0x40)
+        ui.progressBar.setValue(0)
+    elif ui.progressBar.value() < 90:
+        if os.path.exists("rom/data/"):
+            if os.path.exists("rom/data/SCRIPT/"):
+                if os.path.exists("rom/data/SCRIPT/D30P21A/"):
+                    if os.path.exists("rom/data/SCRIPT/D70P41A/"):
+                        if os.path.exists("rom/data/SCRIPT/S00P01A/"):
+                            ui.progressBar.setValue(90)
+                        else:
+                            ui.progressBar.setValue(70)
+                    else:
+                        ui.progressBar.setValue(50)
+                else:
+                    ui.progressBar.setValue(30)
+            else:
+                ui.progressBar.setValue(10)
 
 
 def open_file():
-    global fileName
-    fileName = QFileDialog.getOpenFileName()
-    if fileName[0]:
-        with open(fileName[0], 'r') as f:
+    open_rom(choose_open_file())
+    if not ui.openButton.isEnabled():
+        ui.progressBar.setValue(0)
+        timer.start(1000)
+
+
+def choose_open_file():
+    return QFileDialog.getOpenFileName(None, "Choose a ROM", "", "NDS Files (*.nds)")
+
+
+def create_file():
+    filename = choose_save_file()
+    if filename:
+        ui.progressBar.setValue(0)
+
+        save_values()
+        fix_portraits()
+
+        ui.progressBar.setValue(50)
+        save_all_files()
+
+        if save_rom(filename):
+            ui.progressBar.setValue(100)
+            ctypes.windll.user32.MessageBoxW(0, "Success: file created!", "Complete", 0x40)
+            ui.openButton.setText("Open")
+            ui.progressBar.setValue(0)
+
+
+def choose_save_file():
+    return QFileDialog.getSaveFileName(None, "Choose a Destination", "", "NDS Files (*.nds)")
+
+
+def pmd_sky_eu(memory):
+    code = b'POKEDUN SORAC2SP'
+    for index in range(0, 16):
+        if memory[index] != int2bytes(code[index], 1):
+            return False
+    return True
+
+
+def unpack(my_args, dummy):
+    subprocess.Popen(my_args, creationflags=subprocess.CREATE_NO_WINDOW).wait()  # Ejecutamos ndstool
+
+    memory = []
+    ret = True
+
+    if not load_file("rom/header.bin", memory):
+        ctypes.windll.user32.MessageBoxW(0, "ROM: Failed to open header.bin", "Fail!", 0x10)
+        ret = False
+
+    if not pmd_sky_eu(memory):
+        ctypes.windll.user32.MessageBoxW(0, "ROM: ROM must be Pokemon Mystery Dungeon - Explorers of Sky (EU)",
+                                         "Fail!", 0x10)
+        ret = False
+
+    load_all_files()
+
+    if ret:
+        ui.openButton.setText("Save")  # save
+    ui.openButton.setEnabled(True)
+
+
+def open_rom(filename):
+    if filename[0]:
+
+        ui.openButton.setEnabled(False)
+
+        if os.path.exists("rom"):
+            shutil.rmtree("rom", ignore_errors=True)
+
+        os.mkdir("rom")  # Creamos carpeta rom para poner los ficheros generados por el ndstool
+
+        my_args = [
+            "ndstool.exe",
+            "-x",
+            filename[0],
+            "-9",
+            "rom/arm9.bin",
+            "-7",
+            "rom/arm7.bin",
+            "-y9",
+            "rom/y9.bin",
+            "-y7",
+            "rom/y7.bin",
+            "-d",
+            "rom/data",
+            "-y",
+            "rom/overlay",
+            "-t",
+            "rom/banner.bin",
+            "-h",
+            "rom/header.bin"
+        ]
+
+        thread = threading.Thread(target=unpack, args=(my_args, 0))
+        thread.start()
+
+
+def save_rom(filename):
+    if filename[0]:
+
+        my_args = [
+            "ndstool.exe",
+            "-c",
+            filename[0],
+            "-9",
+            "rom/arm9.bin",
+            "-7",
+            "rom/arm7.bin",
+            "-y9",
+            "rom/y9.bin",
+            "-y7",
+            "rom/y7.bin",
+            "-d",
+            "rom/data",
+            "-y",
+            "rom/overlay",
+            "-t",
+            "rom/banner.bin",
+            "-h",
+            "rom/header.bin"
+        ]
+
+        subprocess.Popen(my_args, creationflags=subprocess.CREATE_NO_WINDOW).wait()  # Ejecutamos ndstool
+
+        if os.path.exists("rom"):
+            shutil.rmtree("rom", ignore_errors=True)
+
+        return True
+    else:
+        return False
+
+
+def load_file(filename, memory):
+    if filename:
+        with open(filename, 'r') as f:
             with mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ) as m:
-                if m.read(16) == b'POKEDUN SORAC2SP':
-                    init_values(m)
-                    ui.actionSave.setEnabled(True)
-                else:
-                    ctypes.windll.user32.MessageBoxW(0, "El juego debe ser el Pokemon mundo misterioso exploradores "
-                                                        "del cielo (EU version)!", "Error!", 0x10)
+                memory.clear()
+                for index in range(0, m.size()):
+                    memory.append(m.read(1))
                 m.close()
+                return True
+    return False
 
 
-def init_values(m):
+def save_file(filename, memory):
+    if filename:
+        with open(filename, 'r+') as f:
+            with mmap.mmap(f.fileno(), 0) as m:
+                m.seek(0)
+                for byte in memory:
+                    m.write(byte)
+                m.close()
+                return True
+    return False
+
+
+def load_all_files():
+    if not load_file("rom/overlay/overlay_0013.bin", overlay13Memory):
+        ctypes.windll.user32.MessageBoxW(0, "ROM: Failed to open overlay_0013.bin", "Fail!", 0x10)
+
+    if not load_file("rom/data/MESSAGE/text_s.str", sTextMemory):
+        ctypes.windll.user32.MessageBoxW(0, "ROM: Failed to open text_s.str", "Fail!", 0x10)
+
+    if not load_file("rom/data/MESSAGE/text_e.str", eTextMemory):
+        ctypes.windll.user32.MessageBoxW(0, "ROM: Failed to open text_e.str", "Fail!", 0x10)
+
+    if not load_file("rom/data/MESSAGE/text_i.str", iTextMemory):
+        ctypes.windll.user32.MessageBoxW(0, "ROM: Failed to open text_i.str", "Fail!", 0x10)
+
+    if not load_file("rom/data/MESSAGE/text_g.str", gTextMemory):
+        ctypes.windll.user32.MessageBoxW(0, "ROM: Failed to open text_g.str", "Fail!", 0x10)
+
+    if not load_file("rom/data/MESSAGE/text_f.str", fTextMemory):
+        ctypes.windll.user32.MessageBoxW(0, "ROM: Failed to open text_f.str", "Fail!", 0x10)
+
+    if not load_file("rom/data/FONT/kaomado.kao", portraitMemory):
+        ctypes.windll.user32.MessageBoxW(0, "ROM: Failed to open kaomado.kao", "Fail!", 0x10)
+
+
+def save_all_files():
+    save_file("rom/overlay/overlay_0013.bin", overlay13Memory)
+    save_file("rom/data/MESSAGE/text_s.str", sTextMemory)
+    save_file("rom/data/MESSAGE/text_e.str", eTextMemory)
+    save_file("rom/data/MESSAGE/text_i.str", iTextMemory)
+    save_file("rom/data/MESSAGE/text_g.str", gTextMemory)
+    save_file("rom/data/MESSAGE/text_f.str", fTextMemory)
+    save_file("rom/data/FONT/kaomado.kao", portraitMemory)
+
+
+def open_save_file():
+    if ui.openButton.text() == "Open":
+        open_file()
+    else:
+        create_file()
+
+
+def pokemon_name(value, language):
+    entry = 0x00008880 + value * 4
+    pointer = bytes2int(textMemory[language][entry] + textMemory[language][entry + 1] +
+                        textMemory[language][entry + 2] + textMemory[language][entry + 3])
+
+    pokemon_name = b''
+    count = 0
+    finish = False
+    while not finish:
+        byte = textMemory[language][pointer + count]
+        if byte == int2bytes(0, 1):
+            finish = True
+        else:
+            pokemon_name += byte
+        count += 1
+
+    return pokemon_name
+
+
+def pokemon_message(value, k):
+    entry = 0x000019F0 + k * 4
+
+    sPersonalityMessage = '¡[CS:K]'.encode('ansi') + pokemon_name(value, 0) + '[CR]!'.encode('ansi')
+    ePersonalityMessage = 'Will be a [CS:K]'.encode('ansi') + pokemon_name(value, 1) + '[CR]!'.encode('ansi')
+    iPersonalityMessage = 'Sarà il Pokémon [CS:K]'.encode('ansi') + pokemon_name(value, 2) + '[CR]!'.encode('ansi')
+    gPersonalityMessage = 'wird ein [CS:K]'.encode('ansi') + pokemon_name(value, 3) + '[CR]!'.encode('ansi')
+    fPersonalityMessage = '... un [CS:K]'.encode('ansi') + pokemon_name(value, 4) + '[CR]!'.encode('ansi')
+    personalityMessages = [sPersonalityMessage, ePersonalityMessage, iPersonalityMessage,
+                           gPersonalityMessage, fPersonalityMessage]
+
+    for language in range(0, 5):
+        pointer = bytes2int(textMemory[language][entry] + textMemory[language][entry + 1] +
+                            textMemory[language][entry + 2] + textMemory[language][entry + 3])
+
+        count = 0
+        finish = False
+        while not finish:
+            byte = textMemory[language][pointer + count]
+            if byte == int2bytes(0, 1):
+                finish = True
+            elif count < len(personalityMessages[language]):
+                textMemory[language][pointer + count] = int2bytes(personalityMessages[language][count], 1)
+            else:
+                textMemory[language][pointer + count] = int2bytes(32, 1)
+            count += 1
+
+
+def fix_portraits():
+    for index in range(0, 1154):
+        entry = 0x000000A0 + index * 160
+        first_pointer = (portraitMemory[entry] + portraitMemory[entry + 1] +
+                         portraitMemory[entry + 2] + portraitMemory[entry + 3])
+
+        byte = portraitMemory[entry + 7]
+        if byte == int2bytes(255, 1):
+            first_pointer += (portraitMemory[entry + 4] + portraitMemory[entry + 5] +
+                              portraitMemory[entry + 6] + portraitMemory[entry + 7])
+        else:
+            first_pointer += signedint2bytes(-bytes2int(portraitMemory[entry + 4] + portraitMemory[entry + 5] +
+                                                        portraitMemory[entry + 6] + portraitMemory[entry + 7]), 4)
+
+        for it in range(2, 40, 2):
+            offset = entry + it * 4
+            byte = portraitMemory[offset + 3]
+            if byte == int2bytes(255, 1):
+                portraitMemory[offset] = int2bytes(first_pointer[0], 1)
+                portraitMemory[offset + 1] = int2bytes(first_pointer[1], 1)
+                portraitMemory[offset + 2] = int2bytes(first_pointer[2], 1)
+                portraitMemory[offset + 3] = int2bytes(first_pointer[3], 1)
+                portraitMemory[offset + 4] = int2bytes(first_pointer[4], 1)
+                portraitMemory[offset + 5] = int2bytes(first_pointer[5], 1)
+                portraitMemory[offset + 6] = int2bytes(first_pointer[6], 1)
+                portraitMemory[offset + 7] = int2bytes(first_pointer[7], 1)
+
+
+def init_values():
     global playerMaleComboBoxes
     global playerMaleCheckBoxes
     global playerFemaleComboBoxes
@@ -87,22 +380,12 @@ def init_values(m):
     global partnerComboBoxes
     global partnerCheckBoxes
 
-    # Buscamos los Pokemon elegibles
-    pokemon_list = []
-    pokemon_string = ''
-    number_bytes = 0
-    length = 4790
-    m.seek(int('0216AD2A', 16))
-    while number_bytes < length:
-        character = m.read(1)
-        if character[0] != 0:
-            pokemon_string += str(chr(character[0]))
-        else:
-            pokemon_list.append(pokemon_string)
-            pokemon_string = ''
-        number_bytes += 1
+    maxPokemonId = 0x218
 
-    # Ponemos los Pokemon elegibles
+    pokemon_list = []
+    for index in range(0, maxPokemonId):
+        pokemon_list.append(pokemon_name(index, 1).decode('ansi'))  # english list
+
     for playerMaleComboBox in playerMaleComboBoxes:
         playerMaleComboBox.addItems(pokemon_list)
     for playerFemaleComboBox in playerFemaleComboBoxes:
@@ -110,22 +393,10 @@ def init_values(m):
     for partnerComboBox in partnerComboBoxes:
         partnerComboBox.addItems(pokemon_list)
 
-    # Buscamos los pokemon player de la rom
-    player_male_list = []
-    player_female_list = []
-    number_bytes = 0
-    length = 32
-    m.seek(int('001E0778', 16))
-    while number_bytes < length:
-        player_male_list.append(bytes2int(m.read(2)))
-        player_female_list.append(bytes2int(m.read(2)))
-        number_bytes += 2
-
-    # Ponemos los pokemon player de la rom
-    it = 0
-    while it < 16:
+    for it in range(0, 16):
+        entry = 0x00001F78 + it * 4
         # Male
-        player_male = player_male_list[it]
+        player_male = bytes2int(overlay13Memory[entry] + overlay13Memory[entry + 1])
         if player_male < 600:
             playerMaleComboBoxes[it].setCurrentIndex(player_male)
             playerMaleCheckBoxes[it].setChecked(False)
@@ -133,38 +404,26 @@ def init_values(m):
             playerMaleComboBoxes[it].setCurrentIndex(player_male - 600)
             playerMaleCheckBoxes[it].setChecked(True)
         # Female
-        player_female = player_female_list[it]
+        player_female = bytes2int(overlay13Memory[entry + 2] + overlay13Memory[entry + 3])
         if player_female < 600:
             playerFemaleComboBoxes[it].setCurrentIndex(player_female)
             playerFemaleCheckBoxes[it].setChecked(False)
         else:
             playerFemaleComboBoxes[it].setCurrentIndex(player_female - 600)
             playerFemaleCheckBoxes[it].setChecked(True)
-        it += 1
 
-    # Buscamos los pokemon partner de la rom
-    partner_list = []
-    number_bytes = 0
-    length = 21
-    m.seek(int('001E074C', 16))
-    while number_bytes < length:
-        partner_list.append(bytes2int(m.read(2)))
-        number_bytes += 1
-
-    # Ponemos los pokemon partner de la rom
-    it = 0
-    while it < 21:
-        partner = partner_list[it]
+    for it in range(0, 21):
+        entry = 0x00001F4C + it * 2
+        partner = bytes2int(overlay13Memory[entry] + overlay13Memory[entry + 1])
         if partner < 600:
             partnerComboBoxes[it].setCurrentIndex(partner)
             partnerCheckBoxes[it].setChecked(False)
         else:
             partnerComboBoxes[it].setCurrentIndex(partner - 600)
             partnerCheckBoxes[it].setChecked(True)
-        it += 1
 
 
-def save_file():
+def save_values():
     global playerMaleComboBoxes
     global playerMaleCheckBoxes
     global playerFemaleComboBoxes
@@ -172,78 +431,44 @@ def save_file():
     global partnerComboBoxes
     global partnerCheckBoxes
 
-    # Datos que vamos a escribir en la rom
-    player_list = []
-    name_list = []
-    it = 0
-    while it < 16:
+    k = 0
+    for it in range(0, 16):
+        entry = 0x00001F78 + it * 4
+        k += 1
         # Male
-        name_list.append(playerMaleComboBoxes[it].currentText())
+        pokemon_message(playerMaleComboBoxes[it].currentIndex(), k)
         if not playerMaleCheckBoxes[it].isChecked():
-            player_list.append(int2bytes(playerMaleComboBoxes[it].currentIndex()))
+            overlay13Memory[entry] = int2bytes(int2bytes(playerMaleComboBoxes[it].currentIndex(), 2)[0], 1)
+            overlay13Memory[entry + 1] = int2bytes(int2bytes(playerMaleComboBoxes[it].currentIndex(), 2)[1], 1)
         else:
-            player_list.append(int2bytes(playerMaleComboBoxes[it].currentIndex() + 600))
+            overlay13Memory[entry] = int2bytes(int2bytes(playerMaleComboBoxes[it].currentIndex() + 600, 2)[0], 1)
+            overlay13Memory[entry + 1] = int2bytes(int2bytes(playerMaleComboBoxes[it].currentIndex() + 600, 2)[1], 1)
+        k += 1
         # Female
-        name_list.append(playerFemaleComboBoxes[it].currentText())
+        pokemon_message(playerFemaleComboBoxes[it].currentIndex(), k)
         if not playerFemaleCheckBoxes[it].isChecked():
-            player_list.append(int2bytes(playerFemaleComboBoxes[it].currentIndex()))
+            overlay13Memory[entry + 2] = int2bytes(int2bytes(playerFemaleComboBoxes[it].currentIndex(), 2)[0], 1)
+            overlay13Memory[entry + 3] = int2bytes(int2bytes(playerFemaleComboBoxes[it].currentIndex(), 2)[1], 1)
         else:
-            player_list.append(int2bytes(playerFemaleComboBoxes[it].currentIndex() + 600))
-        it += 1
+            overlay13Memory[entry + 2] = int2bytes(int2bytes(playerFemaleComboBoxes[it].currentIndex() + 600, 2)[0], 1)
+            overlay13Memory[entry + 3] = int2bytes(int2bytes(playerFemaleComboBoxes[it].currentIndex() + 600, 2)[1], 1)
+        k += 1
 
-    partner_list = []
-    it = 0
-    while it < 21:
+    for it in range(0, 21):
+        entry = 0x00001F4C + it * 2
         if not partnerCheckBoxes[it].isChecked():
-            partner_list.append(int2bytes(partnerComboBoxes[it].currentIndex()))
+            overlay13Memory[entry] = int2bytes(int2bytes(partnerComboBoxes[it].currentIndex(), 2)[0], 1)
+            overlay13Memory[entry + 1] = int2bytes(int2bytes(partnerComboBoxes[it].currentIndex(), 2)[1], 1)
+
         else:
-            partner_list.append(int2bytes(partnerComboBoxes[it].currentIndex() + 600))
-        it += 1
-
-    # Escribimos los datos en el juego
-    global fileName
-    with open(fileName[0], 'r+') as f:
-        with mmap.mmap(f.fileno(), 0) as m:
-            # Player
-            m.seek(int('001DBF28', 16))
-            for player in player_list:
-                m.write(player)
-            m.seek(int('001E0778', 16))
-            for player in player_list:
-                m.write(player)
-            # Partner
-            m.seek(int('001DBEE0', 16))
-            for partner in partner_list:
-                m.write(partner)
-            m.seek(int('001E074C', 16))
-            for partner in partner_list:
-                m.write(partner)
-
-            #Cambiamos los nombres del pokemon player
-            fix_names(m, name_list)
-
-            m.close()
-            ctypes.windll.user32.MessageBoxW(0, "Los cambios se han guardado correctamente!", "Guardado completado!", 0x40)
+            overlay13Memory[entry] = int2bytes(int2bytes(partnerComboBoxes[it].currentIndex() + 600, 2)[0], 1)
+            overlay13Memory[entry + 1] = int2bytes(int2bytes(partnerComboBoxes[it].currentIndex() + 600, 2)[1], 1)
 
 
-def fix_names(m, name_list):
-    # Arreglamos solo el texto en espaniol
-    english_list = [7, 7, 10, 9, 7, 10, 8, 5, 6, 8, 8, 6, 9, 7, 5, 7, 5, 8, 9, 9, 6, 6, 9, 6, 8, 6, 7, 9, 6, 7, 7, 8]
-    spanish_offsets = ['0264CCB3', '0264CCD4', '0264CEB5', '0264CED9', '0264D032', '0264D053', '0264D21C', '0264D23E',
-                       '0264D402', '0264D422', '0264D614', '0264D636', '0264D7C0', '0264D7E3', '0264D968', '0264D987',
-                       '0264DB43', '0264DB62', '0264DCC7', '0264DCEA', '0264DE5C', '0264DE7C', '0264E017', '0264E03A',
-                       '0264E201', '0264E223', '0264E3DC', '0264E3FD', '0264E6A7', '0264E6C7', '0264E91A', '0264E93B']
-    it = 0
-    while it < 32:
-        print(name_list[it])
-        m.seek(int(spanish_offsets[it], 16))
-        print(string2bytes(name_list[it], english_list[it]))
-        m.write(string2bytes(name_list[it], english_list[it]))
-        it += 1
+ui.openButton.clicked.connect(open_save_file)
 
-
-ui.actionOpen.triggered.connect(open_file)
-ui.actionSave.triggered.connect(save_file)
+timer = QTimer()
+timer.timeout.connect(increase_step)
 
 
 window.show()
