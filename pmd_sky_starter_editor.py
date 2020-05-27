@@ -99,6 +99,14 @@ def increase_step():
                 ui.progressBar.setValue(10)
 
 
+def finish():
+    if ui.openButton.isEnabled():
+        timer2.stop()
+        ui.progressBar.setValue(100)
+        ctypes.windll.user32.MessageBoxW(0, "Success: file created!", "Complete", 0x40)
+        ui.progressBar.setValue(0)
+
+
 def open_file():
     open_rom(choose_open_file())
     if not ui.openButton.isEnabled():
@@ -121,11 +129,8 @@ def create_file():
         ui.progressBar.setValue(50)
         save_all_files()
 
-        if save_rom(filename):
-            ui.progressBar.setValue(100)
-            ctypes.windll.user32.MessageBoxW(0, "Success: file created!", "Complete", 0x40)
-            ui.openButton.setText("Open")
-            ui.progressBar.setValue(0)
+        save_rom(filename)
+        timer2.start(1000)
 
 
 def choose_save_file():
@@ -159,6 +164,16 @@ def unpack(my_args, dummy):
 
     if ret:
         ui.openButton.setText("Save")  # save
+    ui.openButton.setEnabled(True)
+
+
+def pack(my_args, dummy):
+    subprocess.Popen(my_args, creationflags=subprocess.CREATE_NO_WINDOW).wait()  # Ejecutamos ndstool
+
+    if os.path.exists("rom"):
+        shutil.rmtree("rom", ignore_errors=True)
+
+    ui.openButton.setText("Open")
     ui.openButton.setEnabled(True)
 
 
@@ -201,6 +216,8 @@ def open_rom(filename):
 def save_rom(filename):
     if filename[0]:
 
+        ui.openButton.setEnabled(False)
+
         my_args = [
             "ndstool.exe",
             "-c",
@@ -223,14 +240,8 @@ def save_rom(filename):
             "rom/header.bin"
         ]
 
-        subprocess.Popen(my_args, creationflags=subprocess.CREATE_NO_WINDOW).wait()  # Ejecutamos ndstool
-
-        if os.path.exists("rom"):
-            shutil.rmtree("rom", ignore_errors=True)
-
-        return True
-    else:
-        return False
+        thread = threading.Thread(target=pack, args=(my_args, 0))
+        thread.start()
 
 
 def load_file(filename, memory):
@@ -469,6 +480,9 @@ ui.openButton.clicked.connect(open_save_file)
 
 timer = QTimer()
 timer.timeout.connect(increase_step)
+
+timer2 = QTimer()
+timer2.timeout.connect(finish)
 
 
 window.show()
